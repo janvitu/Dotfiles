@@ -1,7 +1,9 @@
 export TERM="xterm-256color"
 
 #; Path to your oh-my-zsh installation.
+export JAVA_HOME=$(/usr/libexec/java_home -v1.8.0_221)
 export ZSH=~/.oh-my-zsh
+
 
 # Run spectrum_ls to see a list of colors zsh can easily produce and
 # which can be used in a theme
@@ -120,7 +122,8 @@ POWERLEVEL9K_BATTERY_LOW_THRESHOLD='10'
 POWERLEVEL9K_BATTERY_LOW_COLOR='red'
 POWERLEVEL9K_BATTERY_ICON='\uf1e6'
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir battery context vcs root_indicator dir_writable)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(node_version status background_jobs host user)
+# removed node_version
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs host user)
 HIST_STAMPS="mm/dd/yyyy"
 DISABLE_UPDATE_PROMPT=true
 
