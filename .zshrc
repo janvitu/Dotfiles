@@ -1,7 +1,6 @@
 export TERM="xterm-256color"
 
 #; Path to your oh-my-zsh installation.
-export JAVA_HOME=$(/usr/libexec/java_home -v1.8.0_221)
 export ZSH=~/.oh-my-zsh
 
 
