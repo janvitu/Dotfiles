@@ -1,7 +1,12 @@
 export TERM="xterm-256color"
 
+#path to nvm
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+
 #; Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
+
 
 
 # Run spectrum_ls to see a list of colors zsh can easily produce and
