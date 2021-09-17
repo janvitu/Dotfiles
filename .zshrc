@@ -4,6 +4,13 @@ export TERM="xterm-256color"
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
 
+# setup python3 as default
+alias python=/usr/local/bin/python3
+# setup pip3 as pip
+alias pip=/usr/local/bin/pip3
+# Setup path to Flutter
+export PATH="$PATH:/Users/janvitu/.development/flutter/bin"
+
 #; Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
@@ -43,21 +50,6 @@ source $ZSH/oh-my-zsh.sh
 
 export EDITOR='nvim'
 
-# Load in fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Use ripgrep to get list of files over find, search hidden files, follow symlinks
-export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{.git,package-lock.json}"'
-
-# Type "fd" to open a directory using fzf
-fd() {
-	local dir
-	dir=$(find ${1:-.} -path '*/\.*' -prune \
-		-o -type d -print 2> /dev/null | fzf +m) &&
-		cd "$dir"
-}
-
-
 # Type "fo" to open a file in its default application by hiting ctrl + o when
 # the file is selected
 fo() {
@@ -67,18 +59,6 @@ fo() {
 	nvim $(echo $x | rev | cut -d '/' -f 1,1 | rev)
 }
 
-
-# Helper function to remove/putback work npmrc file
-npmrc() {
-    if [[ -f ~/.npmrc ]]; then
-        mv ~/.npmrc ~/temp.npmrc
-		echo "temp.npmrc"
-    elif [[ -f ~/temp.npmrc ]]; then
-        mv ~/temp.npmrc ~/.npmrc
-		echo ".npmrc"
-    fi
-
-}
 
 #####################################################################################
 ### Powerlevel 9k Settings - https://github.com/bhilburn/powerlevel9k - NOTE: I'm using powerlevel10k
