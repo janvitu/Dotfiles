@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 export TERM="xterm-256color"
 
 #path to nvm
@@ -8,8 +15,9 @@ source $(brew --prefix nvm)/nvm.sh
 alias python=/usr/local/bin/python3
 # setup pip3 as pip
 alias pip=/usr/local/bin/pip3
-# Setup path to Flutter
-export PATH="$PATH:/Users/janvitu/.development/flutter/bin"
+
+# Homebrew 
+export PATH=/opt/homebrew/bin:$PATH
 
 #; Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
@@ -24,7 +32,7 @@ export ZSH=~/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 DEFAULT_USER=`whoami`
 
 # Uncomment the following line to enable command auto-correction.
@@ -44,6 +52,10 @@ plugins=(
 	extract
 	zsh-autosuggestions
 )
+
+# github CLI
+compctl -K _gh gh
+
 # User configuration
 
 source $ZSH/oh-my-zsh.sh
@@ -58,58 +70,6 @@ fo() {
 	cd $folder_path
 	nvim $(echo $x | rev | cut -d '/' -f 1,1 | rev)
 }
-
-
-#####################################################################################
-### Powerlevel 9k Settings - https://github.com/bhilburn/powerlevel9k - NOTE: I'm using powerlevel10k
-#####################################################################################
-
-POWERLEVEL9K_MODE='nerdfont-complete'
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
-POWERLEVEL9K_SHORTEN_STRATEGY="truncate_beginning"
-POWERLEVEL9K_RVM_BACKGROUND="black"
-POWERLEVEL9K_RVM_FOREGROUND="249"
-POWERLEVEL9K_RVM_VISUAL_IDENTIFIER_COLOR="red"
-POWERLEVEL9K_RVM_BACKGROUND="black"
-POWERLEVEL9K_RVM_FOREGROUND="249"
-POWERLEVEL9K_TIME_BACKGROUND="black"
-POWERLEVEL9K_TIME_FOREGROUND="249"
-POWERLEVEL9K_TIME_FORMAT="\UF43A %D{%I:%M  \UF133  %m.%d.%y}"
-POWERLEVEL9K_STATUS_VERBOSE=false
-POWERLEVEL9K_VCS_CLEAN_FOREGROUND='black'
-POWERLEVEL9K_VCS_CLEAN_BACKGROUND='green'
-POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='black'
-POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='yellow'
-POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='white'
-POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='black'
-POWERLEVEL9K_VCS_UNTRACKED_ICON='\u25CF'
-POWERLEVEL9K_VCS_UNSTAGED_ICON='\u00b1'
-POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON='\u2193'
-POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON='\u2191'
-POWERLEVEL9K_VCS_COMMIT_ICON="\uf417"
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='black'
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND='lime'
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=0
-POWERLEVEL9K_FOLDER_ICON=''
-POWERLEVEL9K_STATUS_OK_IN_NON_VERBOSE=true
-POWERLEVEL9K_STATUS_VERBOSE=false
-POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="%F{yellow}\u256D\u2500%f"
-POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{yellow}\u2570\uf460%f "
-POWERLEVEL9K_CUSTOM_DOCKER_SIGNAL="zsh_docker_signal"
-POWERLEVEL9K_CUSTOM_INTERNET_SIGNAL="zsh_internet_signal"
-POWERLEVEL9K_BATTERY_CHARGING='yellow'
-POWERLEVEL9K_BATTERY_CHARGED='green'
-POWERLEVEL9K_BATTERY_DISCONNECTED='$DEFAULT_COLOR'
-POWERLEVEL9K_BATTERY_LOW_THRESHOLD='10'
-POWERLEVEL9K_BATTERY_LOW_COLOR='red'
-POWERLEVEL9K_BATTERY_ICON='\uf1e6'
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir battery context vcs root_indicator dir_writable)
-# removed node_version
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs host user)
-HIST_STAMPS="mm/dd/yyyy"
-DISABLE_UPDATE_PROMPT=true
 
 #################################################
 ### Colorize Man pages
@@ -133,3 +93,6 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 ### Git Stuff
 #################################################
 export REVIEW_BASE=master
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.dotfiles/.p10k.zsh ]] || source ~/.dotfiles/.p10k.zsh
